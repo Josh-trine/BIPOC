@@ -1,6 +1,7 @@
 ﻿using ImageResizeWebApp.Helpers;
 using ImageResizeWebApp.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System;
@@ -31,7 +32,7 @@ namespace ImageResizeWebApp.Controllers
             try
             {
                 // Create a local file in the ./data/ directory for uploading and downloading
-                string localPath = "./data/";
+                string localPath = "./";
                 string fileName = data.Files[0].FileName + Guid.NewGuid().ToString() + ".txt";
                 string localFilePath = Path.Combine(localPath, fileName);
                 Microsoft.Extensions.Primitives.StringValues value = "";
@@ -40,7 +41,6 @@ namespace ImageResizeWebApp.Controllers
                 // Write text to the file
                 if (data.TryGetValue("data", out value))
                 await System.IO.File.WriteAllTextAsync(localFilePath, value);
-
 
                 using (Stream stream = System.IO.File.OpenRead(localFilePath))
                 {
