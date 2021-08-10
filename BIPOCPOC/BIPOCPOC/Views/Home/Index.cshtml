@@ -42,6 +42,31 @@
         padding-bottom: 150px;
     }
 
+    .c-red {
+        color: red;
+    }
+
+    p {
+        color: rgba(0,0,0,.87);
+        margin: 20px auto;
+        font-size: 15px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+        .form-group input.txt, .form-group select.txt {
+            height: 42px;
+        }
+
+        .form-group label:not(.text-danger) {
+            font-weight: 400;
+            font-size: 15px;
+            color: rgba(0,0,0,.87) !important;
+        }
+
+
     .dropzone {
         border: 3px dashed #00a1f1;
         background: #F0F8FF;
@@ -50,25 +75,28 @@
         max-width: 400px;
     }
 
-    .dropzone .dz-message {
-        font-weight: 350;
-    }
+        .dropzone .dz-message {
+            font-weight: 350;
+        }
 
-    .dropzone .dz-message .note {
-        font-family: sans-serif;
-        font-size: 18px;
-        font-weight: 200;
-        display: block;
-        margin-top 1.5rem;
-    }
+            .dropzone .dz-message .note {
+                font-family: sans-serif;
+                font-size: 18px;
+                font-weight: 200;
+                display: block;
+                margin-top 1.5rem;
+            }
 </style>
 
 
 <main>
+    <div class="col-md-4 col-sm-4 col-xs-12 text-center">
+        <img class="img-circle1 img-responsive" src="https://www.startupspace.app/storage/dynamic_survey/customize_image/202107121638441626107924m0bmdtmq4tvwu95pue9p.png" alt="Community Logo Customize">
+    </div>
     <div class="box header">
         <h1><span class="fa fa-user-circle-o"></span> <span id="page-title">BIPOC Test</span></h1>
     </div>
-    
+
     <div class="box content">
         <hr>
         <h2>Upload photos</h2>
@@ -76,14 +104,27 @@
             <form action="/api/images/upload" method="post" enctype="multipart/form-data" id="upload-image" name="upload-image" accept="image/*">
 
                 <input type="file" name="file" id="file" onchange="readURL(this);">
-                <img id="blah" src="#" alt="your image" />
+                <img id="sample" src="#" name="sample" />
 
-                <div class="form-group">
-                    <label class="title_lbl" for="userName">First and Last Name <span class="c-red">*</span></label>
-                    <input type="text" name="data" value="" id="data" class="form-control open" required placeholder="First and Last Name">
+                <input type="hidden" name="user_id" value="email">
+                <input type="hidden" name="dynamic_survey_id" value="874">
+
+                <div class="row">
+                    <div class="col-md-4 col-xs-12">
+                        <div class="form-group">
+                            <label class="title_lbl" for="userName">First and Last Name <span class="c-red">*</span></label>
+                            <input type="text" name="name" value="" id="name" class="form-control open" required placeholder="First and Last Name">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xs-12">
+                        <div class="form-group">
+                            <label class="title_lbl" for="email">Email <span class="c-red">*</span></label>
+                            <input type="email" name="email" value="" id="email" class="form-control open" required placeholder="Email">
+                        </div>
+                    </div>
                 </div>
 
-                <input type="submit" value="Upload Image" name="submit">
+                <input type="submit" value="submit" name="submit">
 
             </form>
         </div>
@@ -101,27 +142,12 @@
             var reader = new FileReader();
 
             reader.onload = function (e) {
-                $('#blah')
+                $('#sample')
                     .attr('src', e.target.result)
-                    .width(150)
-                    .height(200);
+                    .width(400);
             };
 
             reader.readAsDataURL(input.files[0]);
         }
     }
-    /* Dropzone */
-    // "imageUpload" is the camelized version of the HTML element's ID
-    Dropzone.options.imageUpload = {
-        paramName: "files", // The name that will be used to transfer the file
-        dictDefaultMessage: "Drop files here or Click to Upload",
-        addRemoveLinks: true, // Allows for cancellation of file upload and remove thumbnail
-        init: function() {
-            myDropzone = this;
-            myDropzone.on("success", function(file, response) {
-                console.log("Success");
-                myDropzone.removeFile(file);
-            });                    
-        }
-    };
 </script>

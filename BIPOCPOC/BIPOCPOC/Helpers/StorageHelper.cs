@@ -1,7 +1,7 @@
 ﻿using Azure.Storage;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
-using ImageResizeWebApp.Models;
+using BIPOCPOC.Models;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ImageResizeWebApp.Helpers
+namespace BIPOCPOC.Helpers
 {
     public static class StorageHelper
     {

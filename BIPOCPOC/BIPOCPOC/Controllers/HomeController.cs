@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace ImageResizeWebApp.Controllers
+namespace BIPOCPOC.Controllers
 {
     public class HomeController : Controller
     {

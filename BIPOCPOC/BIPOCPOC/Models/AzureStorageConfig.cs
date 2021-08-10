@@ -1,4 +1,4 @@
-﻿namespace ImageResizeWebApp.Models
+﻿namespace BIPOCPOC.Models
 {
     public class AzureStorageConfig
     {

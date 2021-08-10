@@ -1,10 +1,10 @@
-using ImageResizeWebApp.Models;
+using BIPOCPOC.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ImageResizeWebApp
+namespace BIPOCPOC
 {
     public class Startup
     {

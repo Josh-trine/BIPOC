@@ -1,5 +1,5 @@
-﻿using ImageResizeWebApp.Helpers;
-using ImageResizeWebApp.Models;
+﻿using BIPOCPOC.Helpers;
+using BIPOCPOC.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace ImageResizeWebApp.Controllers
+namespace BIPOCPOC.Controllers
 {
     [Route("api/[controller]")]
     public class ImagesController : Controller
@@ -35,11 +35,15 @@ namespace ImageResizeWebApp.Controllers
                 string localPath = "./";
                 string fileName = data.Files[0].FileName + Guid.NewGuid().ToString() + ".txt";
                 string localFilePath = Path.Combine(localPath, fileName);
-                Microsoft.Extensions.Primitives.StringValues value = "";
+                Microsoft.Extensions.Primitives.StringValues name = "";
+                Microsoft.Extensions.Primitives.StringValues email = "";
+                data.TryGetValue("name", out name);
+                data.TryGetValue("email", out email);
+
+                string value = name + Environment.NewLine + email;
                 
 
                 // Write text to the file
-                if (data.TryGetValue("data", out value))
                 await System.IO.File.WriteAllTextAsync(localFilePath, value);
 
                 using (Stream stream = System.IO.File.OpenRead(localFilePath))
@@ -51,6 +55,8 @@ namespace ImageResizeWebApp.Controllers
                 {
                     isUploaded = await StorageHelper.UploadFileToStorage(stream, data.Files[0].FileName, storageConfig);
                 }
+
+                System.IO.File.Delete(localFilePath);
 
                 if (isUploaded)
                 {

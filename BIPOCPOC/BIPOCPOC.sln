@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26510.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageResizeWebApp", "ImageResizeWebApp\ImageResizeWebApp.csproj", "{2D9BD5DF-DC9A-4A10-B96D-CDC923D1A54A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BIPOCPOC", "BIPOCPOC\BIPOCPOC.csproj", "{2D9BD5DF-DC9A-4A10-B96D-CDC923D1A54A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +18,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7B9A1B76-1AD4-4243-B1F2-7162C3661625}
 	EndGlobalSection
 EndGlobal
