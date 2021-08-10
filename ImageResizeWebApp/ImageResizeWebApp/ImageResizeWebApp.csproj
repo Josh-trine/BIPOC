@@ -34,12 +34,4 @@
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="if  &quot;%25CERTKEY%25&quot; == &quot;&quot; (&#xD;&#xA;    echo &quot;Must set environment variable CERTKEY to the certificate thumbprint of a valid development certificate&quot;&#xD;&#xA;    exit -1&#xD;&#xA;)&#xD;&#xA;if not exist &quot;%25SIGNTOOL%25&quot; (&#xD;&#xA;    echo &quot;Must set environment variable SIGNTOOL to full path for signtool.exe code signing utility&quot;&#xD;&#xA;    echo Location is of the form &quot;C:\Program Files (x86)\Windows Kits\8.1\x86\bin\signtool.exe&quot;&#xD;&#xA;    exit -1&#xD;&#xA;)&#xD;&#xA;&quot;%25SIGNTOOL%25&quot; sign /debug /v /fd sha256 /td sha256 /sha1 &quot;%25CERTKEY%25&quot; &quot;$(TargetPath)&quot;&#xD;&#xA;" />
-  </Target>
-
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="if  &quot;%25CERTKEY%25&quot; == &quot;&quot; (&#xD;&#xA;    echo &quot;Must set environment variable CERTKEY to the certificate thumbprint of a valid development certificate&quot;&#xD;&#xA;    exit -1&#xD;&#xA;)&#xD;&#xA;if not exist &quot;%25SIGNTOOL%25&quot; (&#xD;&#xA;    echo &quot;Must set environment variable SIGNTOOL to full path for signtool.exe code signing utility&quot;&#xD;&#xA;    echo Location is of the form &quot;C:\Program Files (x86)\Windows Kits\8.1\x86\bin\signtool.exe&quot;&#xD;&#xA;    exit -1&#xD;&#xA;)&#xD;&#xA;&quot;%25SIGNTOOL%25&quot; sign /debug /v /fd sha256 /td sha256 /sha1 &quot;%25CERTKEY%25&quot; &quot;$(TargetPath)&quot;&#xD;&#xA;" />
-  </Target>
 </Project>
