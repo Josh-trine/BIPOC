@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <IsPackable>false</IsPackable>
+    <ApplicationIcon />
+    <OutputTypeEx>exe</OutputTypeEx>
+    <StartupObject></StartupObject>
+    <UserSecretsId>da2fa23a-b1cc-4721-b9e2-0ade57054c17</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.2.0" />
+    <PackageReference Include="Azure.Storage.Common" Version="12.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="if  &quot;%25CERTKEY%25&quot; == &quot;&quot; (&#xD;&#xA;    echo &quot;Must set environment variable CERTKEY to the certificate thumbprint of a valid development certificate&quot;&#xD;&#xA;    exit -1&#xD;&#xA;)&#xD;&#xA;if not exist &quot;%25SIGNTOOL%25&quot; (&#xD;&#xA;    echo &quot;Must set environment variable SIGNTOOL to full path for signtool.exe code signing utility&quot;&#xD;&#xA;    echo Location is of the form &quot;C:\Program Files (x86)\Windows Kits\8.1\x86\bin\signtool.exe&quot;&#xD;&#xA;    exit -1&#xD;&#xA;)&#xD;&#xA;&quot;%25SIGNTOOL%25&quot; sign /debug /v /fd sha256 /td sha256 /sha1 &quot;%25CERTKEY%25&quot; &quot;$(TargetPath)&quot;&#xD;&#xA;" />
+  </Target>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="if  &quot;%25CERTKEY%25&quot; == &quot;&quot; (&#xD;&#xA;    echo &quot;Must set environment variable CERTKEY to the certificate thumbprint of a valid development certificate&quot;&#xD;&#xA;    exit -1&#xD;&#xA;)&#xD;&#xA;if not exist &quot;%25SIGNTOOL%25&quot; (&#xD;&#xA;    echo &quot;Must set environment variable SIGNTOOL to full path for signtool.exe code signing utility&quot;&#xD;&#xA;    echo Location is of the form &quot;C:\Program Files (x86)\Windows Kits\8.1\x86\bin\signtool.exe&quot;&#xD;&#xA;    exit -1&#xD;&#xA;)&#xD;&#xA;&quot;%25SIGNTOOL%25&quot; sign /debug /v /fd sha256 /td sha256 /sha1 &quot;%25CERTKEY%25&quot; &quot;$(TargetPath)&quot;&#xD;&#xA;" />
+  </Target>
+</Project>

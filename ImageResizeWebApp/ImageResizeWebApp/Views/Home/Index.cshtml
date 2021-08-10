@@ -1,0 +1,127 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<head>
+    <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+    <meta charset=utf-8 />
+    <title>JS Bin</title>
+    <!--[if IE]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <style>
+        article, aside, figure, footer, header, hgroup,
+        menu, nav, section {
+            display: block;
+        }
+    </style>
+</head>
+
+<!-- Client side libs required  -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.css" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/blueimp-gallery/2.25.2/css/blueimp-gallery.min.css" crossorigin="anonymous">
+
+<style>
+    html {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+
+    main {
+        margin: 20px;
+    }
+
+    #gallery-note {
+        font-size: smaller
+    }
+
+    .blueimp-gallery {
+        margin: 25px;
+        max-width: 150px;
+        padding-bottom: 150px;
+    }
+
+    .dropzone {
+        border: 3px dashed #00a1f1;
+        background: #F0F8FF;
+        margin: 25px;
+        border-radius: 5px;
+        max-width: 400px;
+    }
+
+    .dropzone .dz-message {
+        font-weight: 350;
+    }
+
+    .dropzone .dz-message .note {
+        font-family: sans-serif;
+        font-size: 18px;
+        font-weight: 200;
+        display: block;
+        margin-top 1.5rem;
+    }
+</style>
+
+
+<main>
+    <div class="box header">
+        <h1><span class="fa fa-user-circle-o"></span> <span id="page-title">ImageResizer</span></h1>
+    </div>
+    
+    <div class="box content">
+        <hr>
+        <h2>Upload photos</h2>
+        <div>
+            <form action="/api/images/upload" method="post" enctype="multipart/form-data" id="upload-image" name="upload-image" accept="image/*">
+
+                <input type="file" name="file" id="file" onchange="readURL(this);">
+                <img id="blah" src="#" alt="your image" />
+
+                <div class="form-group">
+                    <label class="title_lbl" for="userName">First and Last Name <span class="c-red">*</span></label>
+                    <input type="text" name="data" value="" id="data" class="form-control open" required placeholder="First and Last Name">
+                </div>
+
+                <input type="submit" value="Upload Image" name="submit">
+
+            </form>
+        </div>
+    </div>
+</main>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-gallery/2.25.2/js/blueimp-gallery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(150)
+                    .height(200);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    /* Dropzone */
+    // "imageUpload" is the camelized version of the HTML element's ID
+    Dropzone.options.imageUpload = {
+        paramName: "files", // The name that will be used to transfer the file
+        dictDefaultMessage: "Drop files here or Click to Upload",
+        addRemoveLinks: true, // Allows for cancellation of file upload and remove thumbnail
+        init: function() {
+            myDropzone = this;
+            myDropzone.on("success", function(file, response) {
+                console.log("Success");
+                myDropzone.removeFile(file);
+            });                    
+        }
+    };
+</script>
