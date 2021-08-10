@@ -32,28 +32,29 @@ namespace BIPOCPOC.Controllers
             try
             {
                 // Create a local file in the ./data/ directory for uploading and downloading
-                string localPath = "./";
-                string fileName = data.Files[0].FileName + Guid.NewGuid().ToString() + ".txt";
-                string localFilePath = Path.Combine(localPath, fileName);
+                
                 Microsoft.Extensions.Primitives.StringValues name = "";
                 Microsoft.Extensions.Primitives.StringValues email = "";
                 data.TryGetValue("name", out name);
                 data.TryGetValue("email", out email);
 
                 string value = name + Environment.NewLine + email;
-                
+
+                string localPath = "./";
+                string fileName = name + "-" + data.Files[0].FileName;
+                string localFilePath = Path.Combine(localPath, fileName);
 
                 // Write text to the file
                 await System.IO.File.WriteAllTextAsync(localFilePath, value);
 
                 using (Stream stream = System.IO.File.OpenRead(localFilePath))
                 {
-                    isUploaded = await StorageHelper.UploadFileToStorage(stream, fileName, storageConfig);
+                    isUploaded = await StorageHelper.UploadFileToStorage(stream, Path.GetFileNameWithoutExtension(fileName) + ".txt", storageConfig);
                 }
 
                 using (Stream stream = data.Files[0].OpenReadStream())
                 {
-                    isUploaded = await StorageHelper.UploadFileToStorage(stream, data.Files[0].FileName, storageConfig);
+                    isUploaded = await StorageHelper.UploadFileToStorage(stream, fileName , storageConfig);
                 }
 
                 System.IO.File.Delete(localFilePath);

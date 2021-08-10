@@ -90,40 +90,45 @@
 
 
 <main>
-    <div class="box header">
-        <h1><span class="fa fa-user-circle-o"></span> <span id="page-title">BIPOC Test</span></h1>
-    </div>
+    <div style="width:70vw; margin:0 auto;">
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <img style="width:300px;"img-circle1 img-responsive" src="https://sabipocpoc.blob.core.windows.net/content/meijer_services.jpg" alt="Community Logo Customize">
+        </div>
+        <div class="box header">
+            <h1><span class="fa fa-user-circle-o"></span> <span id="page-title">BIPOC Test</span></h1>
+        </div>
 
-    <div class="box content">
-        <hr>
-        <h2>Upload photos</h2>
-        <div>
-            <form action="/api/images/upload" method="post" enctype="multipart/form-data" id="upload-image" name="upload-image" accept="image/*">
-
-                <input type="file" name="file" id="file" onchange="readURL(this);">
-                <img id="sample" src="#" name="sample" />
-
-                <input type="hidden" name="user_id" value="email">
-                <input type="hidden" name="dynamic_survey_id" value="874">
-
-                <div class="row">
-                    <div class="col-md-4 col-xs-12">
-                        <div class="form-group">
-                            <label class="title_lbl" for="userName">First and Last Name <span class="c-red">*</span></label>
-                            <input type="text" name="name" value="" id="name" class="form-control open" required placeholder="First and Last Name">
+        <div class="box content">
+            <hr>
+            <h2>Upload photos</h2>
+            <div>
+                <form action="/api/images/upload" method="post" enctype="multipart/form-data" id="upload-image" name="upload-image" accept="image/*">
+                    <img id="sample" src="https://sabipocpoc.blob.core.windows.net/content/Photos-new-icon.png" name="sample" />
+                    <br><br>
+                    <input type="file" name="file" id="file" onchange="readURL(this);">
+                    <br><br>
+                    <input type="hidden" name="user_id" value="email">
+                    <input type="hidden" name="dynamic_survey_id" value="874">
+                    <br><br>
+                    <div class="row">
+                        <div class="col-md-4 col-xs-12">
+                            <div class="form-group">
+                                <label class="title_lbl" for="userName">First and Last Name <span class="c-red">*</span></label>
+                                <input type="text" name="name" value="" id="name" class="form-control open" required placeholder="First and Last Name">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-xs-12">
+                            <div class="form-group">
+                                <label class="title_lbl" for="email">Email <span class="c-red">*</span></label>
+                                <input type="email" name="email" value="" id="email" class="form-control open" required placeholder="Email">
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-xs-12">
-                        <div class="form-group">
-                            <label class="title_lbl" for="email">Email <span class="c-red">*</span></label>
-                            <input type="email" name="email" value="" id="email" class="form-control open" required placeholder="Email">
-                        </div>
-                    </div>
-                </div>
 
-                <input type="submit" value="submit" name="submit">
+                    <input type="submit" value="submit" name="submit">
 
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </main>
